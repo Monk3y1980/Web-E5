@@ -25,16 +25,13 @@ btnPrev.addEventListener('click', () => {
     удалении фото слайдер работал корректно
     */
     const itemRight = Math.abs(position) / itemWidth;
-
     position += itemRight >= toScroll ? movePosition : itemRight * itemWidth;
-    setPosition();
     checkBtn();
 });
 
 btnNext.addEventListener('click', () => {
     const itemLeft = itemsSum - (Math.abs(position) + toShow * itemWidth) / itemWidth;
     position -= itemLeft >= toScroll ? movePosition : itemLeft * itemWidth;
-    setPosition();
     checkBtn();
 
 
@@ -47,6 +44,7 @@ const setPosition = () => {
 };
 // отключаю/ включаю кнопки если фото закончились
 const checkBtn = () => {
+    setPosition();
+    btnNext.disabled = position <= -(itemsSum - toShow) * itemWidth;
     btnPrev.disabled = position === 0;
-    btnNext.disabled = position <= -(itemsSum - toShow) * itemWidth
 }
